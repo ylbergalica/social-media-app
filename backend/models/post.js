@@ -14,11 +14,19 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.BLOB,
-      allowNull: false
+      allowNull: true
     },
     text: {
       type: DataTypes.TEXT
-    }
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      }
+    },
   }, {
     sequelize,
     modelName: 'Post',
