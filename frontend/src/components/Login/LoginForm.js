@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Button, TextField, Container, Typography, Box } from '@mui/material';
 
+import { loginUser } from "../../services/api.js"
+
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    loginUser(username, password).then(data => {
+      console.log(data);
+    })
   };
 
   return (

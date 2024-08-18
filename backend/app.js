@@ -3,6 +3,7 @@ const cors = require('cors');
 const db = require('./models');
 
 const postRoutes = require('./routes/postRoutes');
+const userRoutes = require('./routes/userRoutes')
 
 const app = express();
 const port = 5000;
@@ -13,6 +14,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api', postRoutes);
+app.use('/api', userRoutes)
 
 app.get('/', (req, res) => {
   res.status(200).json({
