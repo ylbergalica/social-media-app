@@ -19,7 +19,12 @@ function App() {
 
   return (
     <div>
-      Hello
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/posts" element={<Posts />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
     </div>
   );
 }
