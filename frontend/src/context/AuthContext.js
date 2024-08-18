@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 export const AuthContext = createContext();
 
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem("userId");
     }
 
-    const isLogged = () => {
+    const checkLogged = () => {
         if (localStorage.getItem("userId")) {
             setUserId(localStorage.getItem("userId"))
             return true;
@@ -28,8 +28,10 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isLogged, authLogin, authLogout }}>
+        <AuthContext.Provider value={{ checkLogged, authLogin, authLogout }}>
             {children}
         </AuthContext.Provider>
     );
 };
+
+export const useAuth = () => useContext(AuthContext);
