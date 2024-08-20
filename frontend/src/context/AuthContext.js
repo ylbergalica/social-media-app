@@ -5,9 +5,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [userId, setUserId] = useState(null);
 
-    const authLogin = (username, pass) => {
-        const id = 0 // backend login here
-
+    const authLogin = (id) => {
         setUserId(id);
         localStorage.setItem("userId", id);
     }
@@ -28,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ checkLogged, authLogin, authLogout }}>
+        <AuthContext.Provider value={{ checkLogged, authLogin, authLogout, userId }}>
             {children}
         </AuthContext.Provider>
     );

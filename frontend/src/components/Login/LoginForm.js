@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Button, TextField, Container, Typography, Box } from '@mui/material';
+import { toast } from 'react-toastify';
 
 import { loginUser } from "../../services/api.js"
 
+import { useAuth } from '../../context/AuthContext.js';
+
 function LoginForm() {
+  const auth = useAuth();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,7 +17,11 @@ function LoginForm() {
     event.preventDefault();
 
     loginUser(username, password).then(data => {
-      console.log(data);
+      if (data.userId) {
+        auth.authLogin(data.userId);
+      } else {
+        toast.error('Invalid username or password');
+      }
     })
   };
 
