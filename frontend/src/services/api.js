@@ -14,3 +14,18 @@ export const loginUser = async (username, password) => {
     return error.message;
   }
 };
+
+export const registerUser = async (username, password) => {
+  try {
+    const result = await axios.post(URL + '/register', {
+      username,
+      password
+    });
+
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    };
+  }
+};

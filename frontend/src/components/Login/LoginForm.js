@@ -19,6 +19,7 @@ function LoginForm() {
     loginUser(username, password).then(data => {
       if (data.userId) {
         auth.authLogin(data.userId);
+        toast.success('Welcome, ' + username);
       } else {
         toast.error('Invalid username or password');
       }

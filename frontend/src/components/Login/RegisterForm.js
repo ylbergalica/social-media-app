@@ -1,23 +1,35 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Button, TextField, Container, Typography, Box, Alert } from '@mui/material';
+import { toast } from 'react-toastify';
+
+import { registerUser } from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
 
 function RegisterForm() {
+  const auth = useAuth();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPass, setRepeatPass] = useState('');
-
-  const [error, setError] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (password !== repeatPass) {
-      setError('Passwords do not match');
+      toast.error('Passwords do not match');
       return;
     }
-
-    setError('');
+    else {
+      registerUser(username, password).then(data => {
+        if (data.userId) {
+          auth.authLogin(data.userId);
+          toast.success('Welcome, ' + username);
+        }
+        else if (data.error) toast.error(data.error);
+        else toast.error('Something went wrong');
+      })
+    }
   };
 
   return (
@@ -35,11 +47,6 @@ function RegisterForm() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        {error && (
-          <Alert severity="error" sx={{ mt: 2 }}>
-            {error}
-          </Alert>
-        )}
         <TextField
           margin="normal"
           required

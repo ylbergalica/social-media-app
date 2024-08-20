@@ -16,11 +16,11 @@ const registerUser = async (req, res) => {
     const user = await db.User.findOne({ where: { username } });
 
     if (user) {
-      return res.status(401).json({ error: 'Username already exists' });
+      return res.status(409).json({ error: 'Username already exists' });
     }
 
     const newUser = await db.User.create(req.body);
-    res.status(200).json(newUser);
+    res.status(200).json({ userId: newUser.id });
   } catch (error) {
     res.status(500).json({ error: 'Failed to register user' });
   }
