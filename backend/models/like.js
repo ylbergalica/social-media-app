@@ -32,5 +32,10 @@ module.exports = (sequelize) => {
     noPrimaryKey: true
   });
 
+  Like.associate = models => {
+    Like.belongsTo(models.User, { foreignKey: 'userId' });
+    Like.belongsTo(models.Post, { foreignKey: 'postId' });
+  };
+
   return Like;
 };

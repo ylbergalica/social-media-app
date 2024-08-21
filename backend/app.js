@@ -5,6 +5,7 @@ const db = require('./models');
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
 const likeRoutes = require('./routes/likeRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 
 const app = express();
 const port = 5000;
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/api', userRoutes);
 app.use('/api', postRoutes);
 app.use('/api', likeRoutes);
+app.use('/api', commentRoutes);
 
 app.get('/', (req, res) => {
   res.status(200).json({

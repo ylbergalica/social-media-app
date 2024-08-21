@@ -88,3 +88,29 @@ export const toggleLike = async (postId, userId) => {
     };
   }
 };
+
+export const getPostComments = async (postId) => {
+  try {
+    const result = await axios.get(URL + `/comments/${postId}`);
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    }
+  }
+}
+
+export const addComment = async (postId, userId, text) => {
+  try {
+    const result = await axios.post(URL + '/comments', {
+      postId,
+      userId,
+      text
+    })
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    }
+  }
+}
