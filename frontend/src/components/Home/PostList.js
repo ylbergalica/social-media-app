@@ -7,7 +7,9 @@ const PostList = ({ posts }) => {
     <Container maxWidth="sm" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh', paddingTop: 10 }}>
       <Box sx={{ width: '100%', maxHeight: 'calc(100vh - 64px)', overflowY: 'auto', paddingBottom: 2 }}>
         {posts.map(entry => (
-          <PostCard post={entry} />
+          <PostCard
+            key={entry.id}
+            post={entry} />
         ))}
       </Box>
     </Container>

@@ -1,16 +1,42 @@
-import { Typography, Card, CardContent, CardMedia, CardActions, Button, Icon } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
+import { useEffect, useState } from 'react';
+
+import { Typography, Card, CardContent, CardMedia, CardActions, Button, Icon, IconButton } from '@mui/material';
+import { AccountCircle, ThumbUp, ThumbUpOutlined } from '@mui/icons-material';
+
+import { getUserById, isPostLiked, toggleLike } from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
 
 const PostCard = ({ post }) => {
+  const auth = useAuth();
+
+  const [username, setUsername] = useState('');
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleToggleLike = () => {
+    toggleLike(post.id, auth.userId).then(result => {
+      setIsLiked(result.isLiked);
+    })
+  }
+
+  useEffect(() => {
+    getUserById(post.userId).then(result => {
+      setUsername(result?.user.username || '');
+    })
+
+    isPostLiked(post.id, auth.userId).then(result => {
+      setIsLiked(result.isLiked);
+    })
+  }, [])
+
   return (
     <Card key={post.id} sx={{ marginBottom: 3 }}>
       <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
         <Icon>
           <AccountCircle />
         </Icon>
-        <Typography variant="h6">{post.userId}</Typography>
+        <Typography variant="h6">{username}</Typography>
       </CardContent>
-      {post.image.data.length > 0 && (
+      {post.image && (
         <CardMedia
           component="img"
           width="300"
@@ -29,11 +55,15 @@ const PostCard = ({ post }) => {
             ))} */}
       </CardContent>
       <CardActions>
+        <IconButton size="small" color="primary" onClick={handleToggleLike}>
+          {isLiked ? (
+            <ThumbUp />
+          ) : (
+            <ThumbUpOutlined />
+          )}
+        </IconButton>
         <Button size="small" color="primary">
-          Like
-        </Button>
-        <Button size="small" color="primary">
-          Comment
+          Comments
         </Button>
       </CardActions>
     </Card>

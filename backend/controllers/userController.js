@@ -48,8 +48,25 @@ const loginUser = async (req, res) => {
   }
 }
 
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await db.User.findOne({ where: { id } });
+    
+    if (user) {
+      res.status(200).json({ user });
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve users' });
+  }
+};
+
 module.exports = {
   getAllUsers,
   registerUser,
-  loginUser
+  loginUser,
+  getUserById
 };

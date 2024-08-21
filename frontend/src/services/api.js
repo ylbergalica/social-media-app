@@ -30,6 +30,18 @@ export const registerUser = async (username, password) => {
   }
 };
 
+export const getUserById = async (id) => {
+  try {
+    const result = await axios.get(URL + `/user/${id}`);
+
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    };
+  }
+}
+
 export const getAllPosts = async () => {
   try {
     const result = await axios.get(URL + '/posts');
@@ -53,3 +65,26 @@ export const getPostsByDate = async () => {
     };
   }
 }
+
+export const isPostLiked = async (postId, userId) => {
+  try {
+    const result = await axios.get(URL + `/likeStatus?postId=${postId}&userId=${userId}`);
+
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    };
+  }
+}
+
+export const toggleLike = async (postId, userId) => {
+  try {
+    const result = await axios.post(URL + '/toggleLike', { postId, userId });
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    };
+  }
+};

@@ -35,7 +35,7 @@ const incrementLikes = async (postId) => {
   try {
     await db.Post.increment('likes', { where: { id: postId } });
   } catch (error) {
-    console.error('Failed to increment likes:', error);
+    res.status(500).json({ error: 'Failed to increment likes.' });
   }
 };
 
@@ -43,7 +43,7 @@ const decrementLikes = async (postId) => {
   try {
     await db.Post.decrement('likes', { where: { id: postId } });
   } catch (error) {
-    console.error('Failed to decrement likes:', error);
+    res.status(500).json({ error: 'Failed to decrement likes.' });
   }
 };
 

@@ -12,7 +12,8 @@ module.exports = (sequelize) => {
       references: {
         model: 'Users',
         key: 'id'
-      }
+      },
+      primaryKey: true
     },
     postId: {
       type: DataTypes.INTEGER,
@@ -20,14 +21,15 @@ module.exports = (sequelize) => {
       references: {
         model: 'Posts',
         key: 'id'
-      }
+      },
+      primaryKey: true
     }
   }, {
     sequelize,
     modelName: 'Like',
     tableName: 'Likes',
     timestamps: true,
-    primaryKey: false
+    noPrimaryKey: true
   });
 
   return Like;

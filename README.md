@@ -2,7 +2,11 @@
  
 ### Instructions:
 
-1. Start a MySQL server, xampp was used for this project
+1. Start a MySQL server, for this project i used an instance with:
+username: root
+password: root
+port: 3306
+db: social_media
 
 If the DB doesn't automatically create when running migration command in backend dir:
 ```
