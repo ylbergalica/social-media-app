@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Container, Typography, Box } from '@mui/material';
 import { toast } from 'react-toastify';
 
@@ -9,6 +10,7 @@ import { useAuth } from '../../context/AuthContext.js';
 
 function LoginForm() {
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +22,7 @@ function LoginForm() {
       if (data.userId) {
         auth.authLogin(data.userId);
         toast.success('Welcome, ' + username);
+        navigate('/');
       } else {
         toast.error('Invalid username or password');
       }

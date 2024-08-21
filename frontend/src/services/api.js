@@ -29,3 +29,27 @@ export const registerUser = async (username, password) => {
     };
   }
 };
+
+export const getAllPosts = async () => {
+  try {
+    const result = await axios.get(URL + '/posts');
+
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    };
+  }
+}
+
+export const getPostsByDate = async () => {
+  try {
+    const result = await axios.get(URL + '/new-posts');
+
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    };
+  }
+}

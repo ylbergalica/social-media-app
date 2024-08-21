@@ -27,6 +27,10 @@ module.exports = (sequelize) => {
         key: 'id'
       }
     },
+    likes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
   }, {
     sequelize,
     modelName: 'Post',

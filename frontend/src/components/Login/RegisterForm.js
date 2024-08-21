@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import { useNavigate } from 'react-router-dom';
 import { Button, TextField, Container, Typography, Box, Alert } from '@mui/material';
 import { toast } from 'react-toastify';
 
@@ -8,6 +9,7 @@ import { useAuth } from '../../context/AuthContext';
 
 function RegisterForm() {
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,6 +27,7 @@ function RegisterForm() {
         if (data.userId) {
           auth.authLogin(data.userId);
           toast.success('Welcome, ' + username);
+          navigate('/');
         }
         else if (data.error) toast.error(data.error);
         else toast.error('Something went wrong');

@@ -24,14 +24,16 @@ module.exports = {
       {
         text: 'We live in a society...',
         userId: 1,
+        likes: 2,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         text: 'Morning coffee is way better than morning tea and everyone should agree!!',
         userId: 2,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        likes: 1,
+        createdAt: new Date('2024-01-10T00:00:00Z'),
+        updatedAt: new Date('2024-01-10T00:00:00Z'),
       },
     ], {});
 

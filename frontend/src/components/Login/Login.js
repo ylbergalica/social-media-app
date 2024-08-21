@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Typography, Link, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -14,7 +14,7 @@ function Login() {
   return (
     <Box sx={{ textAlign: 'center' }}>
       {isRegistering ? <RegisterForm /> : <LoginForm />}
-      <div>
+      <Typography>
         {isRegistering ? (
           <>
             Already have an account?{' '}
@@ -30,7 +30,7 @@ function Login() {
             </button>
           </>
         )}
-      </div>
+      </Typography>
     </Box>
   );
 }
