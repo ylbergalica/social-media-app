@@ -2,6 +2,12 @@
  
 ### Instructions:
 
+0. Don't forget to run
+```
+npm i
+```
+in both frontend and backend dirs
+
 1. Start a MySQL server, for this project i used an instance with:
 username: root
 password: root
