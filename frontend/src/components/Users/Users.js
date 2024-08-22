@@ -14,8 +14,6 @@ function Users() {
     getAllUsers().then(data => {
       if (data.error) toast.error(data.error)
       else setUsers(data);
-
-      console.log(data);
     });
   }, []);
 

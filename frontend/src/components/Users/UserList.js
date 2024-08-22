@@ -6,7 +6,7 @@ const UserList = ({ users, searchQuery }) => {
   );
 
   return (
-    <Box sx={{ maxHeight: 400, overflowY: 'auto' }}>
+    <Box>
       {filteredUsers.map(user => (
         <Paper key={user.id} sx={{ padding: 2, margin: 1 }}>
           <Typography variant="h6">{user.username}</Typography>
