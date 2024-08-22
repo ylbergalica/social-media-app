@@ -53,7 +53,7 @@ const getUserById = async (req, res) => {
 
   try {
     const user = await db.User.findOne({ where: { id } });
-    
+
     if (user) {
       res.status(200).json({ user });
     } else {
@@ -64,9 +64,55 @@ const getUserById = async (req, res) => {
   }
 };
 
+const updateUsername = async (req, res) => {
+  const { id, username } = req.body;
+
+  try {
+    const user = await db.User.findOne({ where: { id } });
+
+    if (user) {
+      user.username = username;
+      await user.save();
+
+      res.status(200).json({ message: 'Username updated successfully', user });
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Something went wrong:', error);
+    res.status(500).json({ error: 'Failed to update username' });
+  }
+};
+
+const updatePassword = async (req, res) => {
+  const { id, oldPass, pass } = req.body;
+
+  try {
+    const user = await db.User.findOne({ where: { id } });
+
+    if (user) {
+      if (user.password === oldPass) {
+        user.password = pass;
+        await user.save();
+  
+        res.status(200).json({ message: 'Password changed successfully', user });
+      } else {
+        res.status(405).json({ error: 'Incorrect password!' });
+      }
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Something went wrong:', error);
+    res.status(500).json({ error: 'Failed to update username' });
+  }
+};
+
 module.exports = {
   getAllUsers,
   registerUser,
   loginUser,
-  getUserById
+  getUserById,
+  updateUsername,
+  updatePassword
 };

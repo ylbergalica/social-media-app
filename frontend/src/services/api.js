@@ -53,6 +53,35 @@ export const getAllUsers = async () => {
   }
 }
 
+export const updateUsername = async (userId, username) => {
+  try {
+    const result = await axios.patch(URL + `/change-username`, {
+      id: userId,
+      username
+    });
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    };
+  }
+}
+
+export const updatePassword = async (userId, oldPassword, password) => {
+  try {
+    const result = await axios.patch(URL + `/change-pass`, {
+      id: userId,
+      oldPass: oldPassword,
+      pass: password
+    });
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    };
+  }
+}
+
 // Posts
 export const getAllPosts = async () => {
   try {
