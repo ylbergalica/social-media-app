@@ -23,10 +23,7 @@ const getPostsByDate = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  try {
-    console.log(req.body)
-    console.log('File:', req.file)
-    
+  try {    
     const { userId, text } = req.body;
     const image = req.file ? req.file.buffer : null;
 

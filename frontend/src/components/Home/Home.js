@@ -45,7 +45,6 @@ function Home() {
 
       try {
         const data = sortNewest ? await getPostsByDate() : await getAllPosts();
-        console.log(data);
         setPosts(data.posts);
       } catch (error) {
         toast.error(error.message);

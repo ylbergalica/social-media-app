@@ -20,7 +20,6 @@ const getPostComments = async (req, res) => {
       res.status(404).json({ error: "No comments yet." });
     }
   } catch (error) {
-    console.error('Smth went wrong', error);
     res.status(500).json({ error: 'Failed to retrieve users' });
   }
 };

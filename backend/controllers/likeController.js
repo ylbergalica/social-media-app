@@ -13,8 +13,6 @@ const isPostLiked = async (req, res) => {
       res.status(200).json({ isLiked: false });
     }
   } catch (error) {
-
-    console.error('Error fetching like status:', error);
     res.status(500).json({ error: 'Failed to retrieve users' });
   }
 };

@@ -128,7 +128,6 @@ export const createPost = async (postData) => {
 
     return result.data;
   } catch (error) {
-    console.log(error);
     return {
       error: error.response.data.error
     };

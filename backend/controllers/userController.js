@@ -79,7 +79,6 @@ const updateUsername = async (req, res) => {
       res.status(404).json({ error: 'User not found' });
     }
   } catch (error) {
-    console.error('Something went wrong:', error);
     res.status(500).json({ error: 'Failed to update username' });
   }
 };
@@ -103,7 +102,6 @@ const updatePassword = async (req, res) => {
       res.status(404).json({ error: 'User not found' });
     }
   } catch (error) {
-    console.error('Something went wrong:', error);
     res.status(500).json({ error: 'Failed to update username' });
   }
 };
@@ -121,7 +119,6 @@ const deleteUser = async (req, res) => {
       res.status(404).json({ error: 'User not found' });
     }
   } catch (error) {
-    console.error('Something went wrong:', error);
     res.status(500).json({ error: 'Failed to delete user' });
   }
 };
