@@ -20,7 +20,7 @@ function LoginForm() {
 
     loginUser(username, password).then(data => {
       if (data.userId) {
-        auth.authLogin(data.userId);
+        auth.login(data.userId);
         toast.success('Welcome, ' + username);
         navigate('/');
       } else {

@@ -9,5 +9,6 @@ router.post('/login', userCont.loginUser);
 router.get('/user/:id', userCont.getUserById);
 router.patch('/change-username', userCont.updateUsername);
 router.patch('/change-pass', userCont.updatePassword);
+router.delete('/user/:id', userCont.deleteUser);
 
 module.exports = router;

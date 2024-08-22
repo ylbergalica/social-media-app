@@ -82,6 +82,17 @@ export const updatePassword = async (userId, oldPassword, password) => {
   }
 }
 
+export const deleteUser = async (userId) => {
+  try {
+    const result = await axios.delete(URL + `/user/${userId}`);
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error || 'Failed to delete user'
+    };
+  }
+}
+
 // Posts
 export const getAllPosts = async () => {
   try {

@@ -108,11 +108,30 @@ const updatePassword = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await db.User.findOne({ where: { id } });
+
+    if (user) {
+      await user.destroy();
+      res.status(200).json({ message: 'User deleted successfully' });
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Something went wrong:', error);
+    res.status(500).json({ error: 'Failed to delete user' });
+  }
+};
+
 module.exports = {
   getAllUsers,
   registerUser,
   loginUser,
   getUserById,
   updateUsername,
-  updatePassword
+  updatePassword,
+  deleteUser
 };

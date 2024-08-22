@@ -1,18 +1,22 @@
 import React, { createContext, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const navigate = useNavigate();
+
     const [userId, setUserId] = useState(null);
 
-    const authLogin = (id) => {
+    const login = (id) => {
         setUserId(id);
         localStorage.setItem("userId", id);
     }
 
-    const authLogout = () => {
+    const logout = () => {
         setUserId(null);
         localStorage.removeItem("userId");
+        navigate('/login');
     }
 
     const checkLogged = () => {
@@ -26,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ checkLogged, authLogin, authLogout, userId }}>
+        <AuthContext.Provider value={{ checkLogged, login, logout, userId }}>
             {children}
         </AuthContext.Provider>
     );

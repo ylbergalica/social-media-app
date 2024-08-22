@@ -25,7 +25,7 @@ function RegisterForm() {
     else {
       registerUser(username, password).then(data => {
         if (data.userId) {
-          auth.authLogin(data.userId);
+          auth.login(data.userId);
           toast.success('Welcome, ' + username);
           navigate('/');
         }
