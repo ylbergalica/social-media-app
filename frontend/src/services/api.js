@@ -2,6 +2,7 @@ import axios from "axios";
 
 const URL = "http://localhost:5000/api";
 
+// Users
 export const loginUser = async (username, password) => {
   try {
     const result = await axios.post(URL + '/login', {
@@ -33,7 +34,6 @@ export const registerUser = async (username, password) => {
 export const getUserById = async (id) => {
   try {
     const result = await axios.get(URL + `/user/${id}`);
-
     return result.data;
   } catch (error) {
     return {
@@ -42,6 +42,18 @@ export const getUserById = async (id) => {
   }
 }
 
+export const getAllUsers = async () => {
+  try {
+    const result = await axios.get(URL + '/users');
+    return result.data;
+  } catch (error) {
+    return {
+      error: error.response.data.error
+    };
+  }
+}
+
+// Posts
 export const getAllPosts = async () => {
   try {
     const result = await axios.get(URL + '/posts');
@@ -66,6 +78,7 @@ export const getPostsByDate = async () => {
   }
 }
 
+// Likes
 export const isPostLiked = async (postId, userId) => {
   try {
     const result = await axios.get(URL + `/likeStatus?postId=${postId}&userId=${userId}`);
@@ -89,6 +102,7 @@ export const toggleLike = async (postId, userId) => {
   }
 };
 
+// Comments
 export const getPostComments = async (postId) => {
   try {
     const result = await axios.get(URL + `/comments/${postId}`);
