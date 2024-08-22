@@ -24,7 +24,18 @@ const getPostsByDate = async (req, res) => {
 
 const createPost = async (req, res) => {
   try {
-    const newPost = await db.Post.create(req.body);
+    console.log(req.body)
+    console.log('File:', req.file)
+    
+    const { userId, text } = req.body;
+    const image = req.file ? req.file.buffer : null;
+
+    const newPost = await db.Post.create({
+      userId,
+      text,
+      image
+    });
+
     res.status(200).json({ newPost });
   } catch (error) {
     res.status(500).json({ error: 'Failed to create post' });

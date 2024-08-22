@@ -118,6 +118,23 @@ export const getPostsByDate = async () => {
   }
 }
 
+export const createPost = async (postData) => {
+  try {
+    const result = await axios.post(URL + '/posts', postData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    return result.data;
+  } catch (error) {
+    console.log(error);
+    return {
+      error: error.response.data.error
+    };
+  }
+}
+
 // Likes
 export const isPostLiked = async (postId, userId) => {
   try {
